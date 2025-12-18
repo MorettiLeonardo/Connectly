@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Connectly.API/Connectly.API.csproj" />
+    <Project Path="src/Connectly.Application/Connectly.Application.csproj" />
+    <Project Path="src/Connectly.Domain/Connectly.Domain.csproj" />
+    <Project Path="src/Connectly.Infra.Data/Connectly.Infra.Data.csproj" />
+    <Project Path="src/Connectly.IoC/Connectly.IoC.csproj" />
+  </Folder>
+  <Folder Name="/tests/" />
+</Solution>
