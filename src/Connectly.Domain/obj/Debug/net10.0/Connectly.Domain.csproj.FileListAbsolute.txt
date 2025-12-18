@@ -1,0 +1,11 @@
+C:\Users\mosai\source\repos\Connectly\src\Connectly.Domain\bin\Debug\net10.0\Connectly.Domain.deps.json
+C:\Users\mosai\source\repos\Connectly\src\Connectly.Domain\bin\Debug\net10.0\Connectly.Domain.dll
+C:\Users\mosai\source\repos\Connectly\src\Connectly.Domain\bin\Debug\net10.0\Connectly.Domain.pdb
+C:\Users\mosai\source\repos\Connectly\src\Connectly.Domain\obj\Debug\net10.0\Connectly.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mosai\source\repos\Connectly\src\Connectly.Domain\obj\Debug\net10.0\Connectly.Domain.AssemblyInfoInputs.cache
+C:\Users\mosai\source\repos\Connectly\src\Connectly.Domain\obj\Debug\net10.0\Connectly.Domain.AssemblyInfo.cs
+C:\Users\mosai\source\repos\Connectly\src\Connectly.Domain\obj\Debug\net10.0\Connectly.Domain.csproj.CoreCompileInputs.cache
+C:\Users\mosai\source\repos\Connectly\src\Connectly.Domain\obj\Debug\net10.0\Connectly.Domain.dll
+C:\Users\mosai\source\repos\Connectly\src\Connectly.Domain\obj\Debug\net10.0\refint\Connectly.Domain.dll
+C:\Users\mosai\source\repos\Connectly\src\Connectly.Domain\obj\Debug\net10.0\Connectly.Domain.pdb
+C:\Users\mosai\source\repos\Connectly\src\Connectly.Domain\obj\Debug\net10.0\ref\Connectly.Domain.dll
