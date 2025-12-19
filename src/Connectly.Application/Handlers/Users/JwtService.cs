@@ -20,15 +20,24 @@ namespace Connectly.Application.Handlers.Users
         {
             var jwtSettings = _configuration.GetSection("JwtSettings");
             var secreteKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["SecretKey"] ?? string.Empty));
+            var expirationTime = jwtSettings.GetValue<int>("ExpirationTimeInMinutes");
 
             //claims
             var claims = new List<Claim>()
             {
                 new (JwtRegisteredClaimNames.Sub, user.Name),
-                new (JwtRegisteredClaimNames.Jti, Guid.NewGuid().toString()),
+                new (JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             };
+            
+            //montar token
+            var token = new JwtSecurityToken(
+                issuer: jwtSettings.GetValue<string>("Issuer"),
+                audience: jwtSettings.GetValue<string>("Audience"),
+                claims,
+                expires: DateTime.UtcNow.AddMinutes(expirationTime),
+                signingCredentials: new SigningCredentials(secreteKey, SecurityAlgorithms.HmacSha256));
 
-            return token;
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }

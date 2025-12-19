@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Itens de Solução/">
+    <File Path=".gitignore" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="src/Connectly.API/Connectly.API.csproj" />
     <Project Path="src/Connectly.Application/Connectly.Application.csproj" />

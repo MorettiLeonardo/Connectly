@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Connectly.Infra.Data")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3599e809c33f3fe458e5d2c0d3901db5756fe261")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+290c3da9d0d9bf8d973edfa1029c70b7ad5b85e0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Connectly.Infra.Data")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Connectly.Infra.Data")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
