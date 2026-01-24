@@ -42,17 +42,21 @@ namespace Connectly.Infra.Data.Mapping
             builder.Property(u => u.AvatarUrl)
                    .HasMaxLength(300);
 
-            // Quem EU sigo
             builder.HasMany(u => u.Following)
-                   .WithOne(f => f.Follower)
-                   .HasForeignKey(f => f.FollowerId)
-                   .OnDelete(DeleteBehavior.NoAction);
+                .WithOne(f => f.Follower)
+                .HasForeignKey(f => f.FollowerId)
+                .OnDelete(DeleteBehavior.NoAction);
 
-            // Quem me segue
             builder.HasMany(u => u.Followers)
                    .WithOne(f => f.Following)
                    .HasForeignKey(f => f.FollowingId)
                    .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Navigation(u => u.Following)
+                   .UsePropertyAccessMode(PropertyAccessMode.Field);
+
+            builder.Navigation(u => u.Followers)
+                   .UsePropertyAccessMode(PropertyAccessMode.Field);
         }
     }
 }

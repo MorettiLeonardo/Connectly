@@ -4,12 +4,14 @@ namespace Connectly.Domain.Entities
 {
     public class User : BaseEntity
     {
+        protected User() { }
+
         public string Name { get; private set; } = string.Empty;
         public string UserName { get; private set; } = string.Empty;
         public string Email { get; private set; } = string.Empty;
         public string Password { get; private set; } = string.Empty;
-        public string Bio { get; private set; } = string.Empty;
-        public string AvatarUrl { get; private set; } = string.Empty;
+        public string? Bio { get; private set; } = string.Empty;
+        public string? AvatarUrl { get; private set; } = string.Empty;
 
         private readonly List<Follow> _following = [];
         private readonly List<Follow> _followers = [];
@@ -17,7 +19,15 @@ namespace Connectly.Domain.Entities
         public IReadOnlyCollection<Follow> Following => _following;
         public IReadOnlyCollection<Follow> Followers => _followers;
 
-        public User() { }
+        public User(string name, string username, string email, string password, string? bio, string? avatarUrl)
+        {
+            Name = name;
+            UserName = username;
+            Email = email;
+            Password = password;
+            Bio = bio;
+            AvatarUrl = avatarUrl;
+        }
 
         protected override void Validate()
         {

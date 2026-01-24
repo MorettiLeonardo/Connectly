@@ -11,7 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\Connectly.Application\Connectly.Application.csproj" />
+    <ProjectReference Include="..\Connectly.IoC\Connectly.IoC.csproj" />
   </ItemGroup>
 
 </Project>

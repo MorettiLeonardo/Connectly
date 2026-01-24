@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mosai\\source\\repos\\Connectly\\src\\Connectly.Infra.Data\\Connectly.Infra.Data.csproj": {}
+    "C:\\Connectly\\src\\Connectly.Infra.Data\\Connectly.Infra.Data.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mosai\\source\\repos\\Connectly\\src\\Connectly.Domain\\Connectly.Domain.csproj": {
+    "C:\\Connectly\\src\\Connectly.Domain\\Connectly.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mosai\\source\\repos\\Connectly\\src\\Connectly.Domain\\Connectly.Domain.csproj",
+        "projectUniqueName": "C:\\Connectly\\src\\Connectly.Domain\\Connectly.Domain.csproj",
         "projectName": "Connectly.Domain",
-        "projectPath": "C:\\Users\\mosai\\source\\repos\\Connectly\\src\\Connectly.Domain\\Connectly.Domain.csproj",
-        "packagesPath": "C:\\Users\\mosai\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mosai\\source\\repos\\Connectly\\src\\Connectly.Domain\\obj\\",
+        "projectPath": "C:\\Connectly\\src\\Connectly.Domain\\Connectly.Domain.csproj",
+        "packagesPath": "C:\\Users\\leona\\.nuget\\packages\\",
+        "outputPath": "C:\\Connectly\\src\\Connectly.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\mosai\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\leona\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -65,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -343,20 +343,20 @@
         }
       }
     },
-    "C:\\Users\\mosai\\source\\repos\\Connectly\\src\\Connectly.Infra.Data\\Connectly.Infra.Data.csproj": {
+    "C:\\Connectly\\src\\Connectly.Infra.Data\\Connectly.Infra.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mosai\\source\\repos\\Connectly\\src\\Connectly.Infra.Data\\Connectly.Infra.Data.csproj",
+        "projectUniqueName": "C:\\Connectly\\src\\Connectly.Infra.Data\\Connectly.Infra.Data.csproj",
         "projectName": "Connectly.Infra.Data",
-        "projectPath": "C:\\Users\\mosai\\source\\repos\\Connectly\\src\\Connectly.Infra.Data\\Connectly.Infra.Data.csproj",
-        "packagesPath": "C:\\Users\\mosai\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mosai\\source\\repos\\Connectly\\src\\Connectly.Infra.Data\\obj\\",
+        "projectPath": "C:\\Connectly\\src\\Connectly.Infra.Data\\Connectly.Infra.Data.csproj",
+        "packagesPath": "C:\\Users\\leona\\.nuget\\packages\\",
+        "outputPath": "C:\\Connectly\\src\\Connectly.Infra.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\mosai\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\leona\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -371,8 +371,8 @@
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\mosai\\source\\repos\\Connectly\\src\\Connectly.Domain\\Connectly.Domain.csproj": {
-                "projectPath": "C:\\Users\\mosai\\source\\repos\\Connectly\\src\\Connectly.Domain\\Connectly.Domain.csproj"
+              "C:\\Connectly\\src\\Connectly.Domain\\Connectly.Domain.csproj": {
+                "projectPath": "C:\\Connectly\\src\\Connectly.Domain\\Connectly.Domain.csproj"
               }
             }
           }
@@ -406,6 +406,14 @@
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[10.0.1, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[10.0.2, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[10.0.2, )"
             }
           },
           "imports": [
@@ -424,7 +432,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
