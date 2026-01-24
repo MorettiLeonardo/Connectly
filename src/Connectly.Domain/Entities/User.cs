@@ -29,6 +29,16 @@ namespace Connectly.Domain.Entities
             AvatarUrl = avatarUrl;
         }
 
+        public void UpdateProfile(string? name, string? userName, string? bio)
+        {
+            Name = name!;
+            UserName = userName!;
+            Bio = bio;
+
+            UpdatedAt = DateTime.UtcNow;
+        }
+
+
         protected override void Validate()
         {
             throw new NotImplementedException();

@@ -1,7 +1,7 @@
 ﻿using Connectly.Application.Handlers.Users;
 using Connectly.Application.Handlers.Users.Interfaces;
+using Connectly.Domain.Interfaces;
 using Connectly.Infra.Data.Context;
-using Connectly.Infra.Data.Repositories.UserRepositories;
 using Connectly.Infra.Data.Repositories.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

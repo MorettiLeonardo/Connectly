@@ -1,6 +1,6 @@
 ﻿namespace Connectly.Application.Handlers.Users.Responses
 {
-    public class CreateUserResponse
+    public class ReturnOneUserResponse
     {
         public string Name { get; set; } = string.Empty;
         public string UserName { get; set; } = string.Empty;
