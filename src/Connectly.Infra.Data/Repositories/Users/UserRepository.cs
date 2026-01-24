@@ -1,6 +1,7 @@
 ﻿using Connectly.Domain.Entities;
+using Connectly.Domain.Interfaces;
 using Connectly.Infra.Data.Context;
-using Connectly.Infra.Data.Repositories.UserRepositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Connectly.Infra.Data.Repositories.Users
 {
@@ -10,6 +11,16 @@ namespace Connectly.Infra.Data.Repositories.Users
         public UserRepository(ApplicationDbContext context)
             : base(context)
         {
+        }
+
+        public async Task<List<User>> GetAllUsers()
+        {
+            return await _context.Users.ToListAsync();
+        }
+
+        public async Task<User?> GetUserById(Guid id)
+        {
+            return await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }
