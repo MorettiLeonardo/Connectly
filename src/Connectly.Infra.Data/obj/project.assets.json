@@ -4655,23 +4655,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\leona\\.nuget\\packages\\": {},
+    "C:\\Users\\mosai\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Connectly\\src\\Connectly.Infra.Data\\Connectly.Infra.Data.csproj",
+      "projectUniqueName": "C:\\connectly\\src\\Connectly.Infra.Data\\Connectly.Infra.Data.csproj",
       "projectName": "Connectly.Infra.Data",
-      "projectPath": "C:\\Connectly\\src\\Connectly.Infra.Data\\Connectly.Infra.Data.csproj",
-      "packagesPath": "C:\\Users\\leona\\.nuget\\packages\\",
-      "outputPath": "C:\\Connectly\\src\\Connectly.Infra.Data\\obj\\",
+      "projectPath": "C:\\connectly\\src\\Connectly.Infra.Data\\Connectly.Infra.Data.csproj",
+      "packagesPath": "C:\\Users\\mosai\\.nuget\\packages\\",
+      "outputPath": "C:\\connectly\\src\\Connectly.Infra.Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\leona\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mosai\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4686,8 +4686,8 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "projectReferences": {
-            "C:\\Connectly\\src\\Connectly.Domain\\Connectly.Domain.csproj": {
-              "projectPath": "C:\\Connectly\\src\\Connectly.Domain\\Connectly.Domain.csproj"
+            "C:\\connectly\\src\\Connectly.Domain\\Connectly.Domain.csproj": {
+              "projectPath": "C:\\connectly\\src\\Connectly.Domain\\Connectly.Domain.csproj"
             }
           }
         }
@@ -4747,7 +4747,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",

@@ -6,9 +6,10 @@ namespace Connectly.Infra.Data.Context
 {
     public class ApplicationDbContext : DbContext, IUnitOfWork
     {
-        public ApplicationDbContext(
-            DbContextOptions<ApplicationDbContext> options
-        ) : base(options) { }
+        public ApplicationDbContext() { }
+
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options) { }
 
         public DbSet<User> Users => Set<User>();
         public DbSet<Comment> Comments => Set<Comment>();
@@ -25,9 +26,7 @@ namespace Connectly.Infra.Data.Context
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.ApplyConfigurationsFromAssembly(
-                typeof(ApplicationDbContext).Assembly
-            );
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         }
     }
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9DlkYwKC+9s=",
+  "dgSpecHash": "DbBNomEkBn0=",
   "success": true,
-  "projectFilePath": "C:\\Connectly\\src\\Connectly.Domain\\Connectly.Domain.csproj",
+  "projectFilePath": "C:\\connectly\\src\\Connectly.Domain\\Connectly.Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

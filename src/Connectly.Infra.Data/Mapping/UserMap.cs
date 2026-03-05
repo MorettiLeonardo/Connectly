@@ -29,18 +29,47 @@ namespace Connectly.Infra.Data.Mapping
                    .IsRequired()
                    .HasMaxLength(100);
 
-            builder.Property(u => u.Email)
-                   .IsRequired()
-                   .HasMaxLength(150);
+            builder.OwnsOne(x => x.Email)
+                .Property(x => x.Address)
+                .HasColumnName("Email")
+                .IsRequired(true);
 
-            builder.Property(u => u.Password)
-                   .IsRequired();
+            builder.OwnsOne(x => x.Email)
+                .OwnsOne(x => x.Verification)
+                .Property(x => x.Code)
+                .HasColumnName("EmailVerificationCode")
+                .IsRequired(true);
 
+            builder.OwnsOne(x => x.Email)
+                .OwnsOne(x => x.Verification)
+                .Property(x => x.ExpiresAt)
+                .HasColumnName("EmailVerificationExpiresAt")
+                .IsRequired(false);
+
+            builder.OwnsOne(x => x.Email)
+                .OwnsOne(x => x.Verification)
+                .Property(x => x.VerifiedAt)
+                .HasColumnName("EmailVerificationVerifiedAt")
+                .IsRequired(false);
+
+            builder.OwnsOne(x => x.Email)
+                .OwnsOne(x => x.Verification)
+                .Ignore(x => x.IsActive);
+
+            builder.OwnsOne(x => x.Password)
+                .Property(x => x.Hash)
+                .HasColumnName("PasswordHash")
+                .IsRequired();
+
+            builder.OwnsOne(x => x.Password)
+                .Property(x => x.ResetCode)
+                .HasColumnName("PasswordResetCode")
+                .IsRequired();
             builder.Property(u => u.Bio)
                    .HasMaxLength(500);
 
             builder.Property(u => u.AvatarUrl)
-                   .HasMaxLength(300);
+                   .HasMaxLength(255);
 
             builder.HasMany(u => u.Following)
                 .WithOne(f => f.Follower)
