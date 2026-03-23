@@ -1,6 +1,7 @@
-﻿using Connectly.Domain.DomainObjects;
+﻿using Connectly.Domain.Contexts.Entities.Users;
+using Connectly.Domain.DomainObjects;
 
-namespace Connectly.Domain.Entities
+namespace Connectly.Domain.Contexts.Entities
 {
     public class Comment : BaseEntity
     {

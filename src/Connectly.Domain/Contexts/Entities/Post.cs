@@ -1,6 +1,6 @@
 ﻿using Connectly.Domain.DomainObjects;
 
-namespace Connectly.Domain.Entities
+namespace Connectly.Domain.Contexts.Entities
 {
     public class Post : BaseEntity
     {

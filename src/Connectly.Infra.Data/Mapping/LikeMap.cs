@@ -1,4 +1,4 @@
-﻿using Connectly.Domain.Entities;
+﻿using Connectly.Domain.Contexts.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

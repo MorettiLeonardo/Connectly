@@ -1,5 +1,9 @@
-﻿using Connectly.Application.Handlers.Users.Interfaces;
+﻿using Connectly.Application.Configurations;
+using Connectly.Application.Handlers.Users;
+using Connectly.Application.Handlers.Users.Interfaces;
 using Connectly.Application.Handlers.Users.Requests;
+using Connectly.Application.Handlers.Users.Responses;
+using Connectly.Domain.DomainObjects.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Connectly.API.Controllers.v1
@@ -10,61 +14,33 @@ namespace Connectly.API.Controllers.v1
     {
         private readonly IUserHandler _userHandler;
 
-        public UserController(IUserHandler userHandler  )
+        public UserController(IUserHandler userHandler)
         {
             _userHandler = userHandler;
         }
 
-        [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> CreateUser([FromBody] CreateUserRequest request)
+        [HttpPost("register")]
+        public async Task<ActionResult<ApiResponse<RegisterResponse>>> Register(
+            [FromBody] RegisterRequest request)
         {
-            var response = await _userHandler.CreateUserAsync(request);
+            var result = await _userHandler.RegisterAsync(request);
 
-            if (response == null)
-                return BadRequest();
+            if (!result.IsSuccess)
+                return BadRequest(result);
 
-            return Created();
+            return Ok(result);
         }
 
-        [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetAllUsers()
+        [HttpPost("login")]
+        public async Task<ActionResult<ApiResponse<LoginResponse>>> Login(
+            [FromBody] LoginRequest request)
         {
-            var response = await _userHandler.GetAllUsersAsync();
+            var result = await _userHandler.LoginAsync(request);
 
-            if (response == null)
-                return BadRequest();
+            if (!result.IsSuccess)
+                return Unauthorized(result);
 
-            return Ok(response);
-        }
-
-        [HttpPut("{id:guid}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateUser([FromRoute] Guid id, [FromBody]UpdateUserRequest request)
-        {
-            var response = await _userHandler.UpdateUserAsync(id, request);
-
-            if (response == null)
-                return BadRequest();
-
-            return Ok(response);
-        }
-
-        [HttpGet("{id:guid}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetUserById([FromRoute] Guid id)
-        {
-            var response = await _userHandler.GetUserByIdAsync(id);
-
-            if (response == null)
-                return BadRequest();
-
-            return Ok(response);
+            return Ok(result);
         }
     }
 }

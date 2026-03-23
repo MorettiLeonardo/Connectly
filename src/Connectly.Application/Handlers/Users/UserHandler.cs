@@ -1,105 +1,98 @@
-﻿using Azure.Core;
-using Connectly.Application.Configurations;
+﻿using Connectly.Application.Configurations;
+using Connectly.Application.Handlers.JwtService.Interfaces;
 using Connectly.Application.Handlers.Users.Interfaces;
 using Connectly.Application.Handlers.Users.Requests;
+using Connectly.Application.Handlers.Users.Requests.Validation;
 using Connectly.Application.Handlers.Users.Responses;
-using Connectly.Domain.Entities;
-using Connectly.Domain.Interfaces;
+using Connectly.Domain.Contexts.Entities.Users;
+using Connectly.Domain.Contexts.Entities.Users.Interfaces;
+using Microsoft.AspNetCore.Identity;
 
 namespace Connectly.Application.Handlers.Users
 {
     public class UserHandler : IUserHandler
     {
-
-        private readonly IUserRepository _userRepository;
-
-        public UserHandler(IUserRepository userRepository)
+        private readonly IUserRepository _useRepository;
+        private readonly UserManager<User> _userManager;
+        private readonly IJwtService _jwtServie;
+        
+        public UserHandler(
+            IUserRepository useRepository,
+            UserManager<User> userManager,
+            IJwtService jwtServie)
         {
-            _userRepository = userRepository;
+            _useRepository = useRepository;
+            _userManager = userManager;
+            _jwtServie = jwtServie;
         }
 
-        public async Task<ApiResponse<ReturnOneUserResponse>> CreateUserAsync(CreateUserRequest request)
+        public async Task<ApiResponse<RegisterResponse>> RegisterAsync(RegisterRequest request)
         {
-            if (request == null)
-                return new ApiResponse<ReturnOneUserResponse>(400, "Request is null", null!);
+            var validator = new RegisterRequestValidator();
+            var validationResult = await validator.ValidateAsync(request);
 
-            var user = new User(request.Name, request.UserName, request.Email, request.Password, request.Bio, request.AvatarUrl);
-
-            _userRepository.Add(user);
-            await _userRepository.UnitOfWork.CommitAsync();
-
-            var response = new ReturnOneUserResponse
+            if (!validationResult.IsValid)
             {
-                AvatarUrl = request.AvatarUrl,
-                Bio = request.Bio,
-                Email = request.Email,
-                Name = request.Name,
-                UserName = request.UserName
+                return new ApiResponse<RegisterResponse>(400, "Not Valid Data", null!);
+            }
+
+            var existingUser = await _userManager.FindByEmailAsync(request.Email);
+            if (existingUser is not null)
+            {
+                return new ApiResponse<RegisterResponse>(400, "Email already in use", null!);
+            }
+
+            var user = new User(request.Name, request.Email);
+
+            var result = await _userManager.CreateAsync(user, request.Password);
+
+            var response = new RegisterResponse
+            {
+                Name = user.Name,
+                Email = user.Email!,
             };
 
-            return new ApiResponse<ReturnOneUserResponse>(200, "User created", response);
+            return new ApiResponse<RegisterResponse>(200, "User created", response);
         }
 
-        public async Task<ApiResponse<List<GetAllUsersResponse>>> GetAllUsersAsync()
+        public async Task<ApiResponse<LoginResponse>> LoginAsync(LoginRequest request)
         {
-            var users = await _userRepository.GetAllUsers();
+            var validator = new LoginRequestValidator();
+            var validationResult = await validator.ValidateAsync(request);
 
-            if (users == null)
-                return new ApiResponse<List<GetAllUsersResponse>>(404, "Users not found", null!);
+            if (!validationResult.IsValid)
+            {
+                return new ApiResponse<LoginResponse>(400, "Not Valid Data", null!);
+            }
 
-            var response = users.Select(user => new GetAllUsersResponse
+            var user = await _userManager.FindByEmailAsync(request.Email);
+            if (user is null)
+            {
+                return new ApiResponse<LoginResponse>(400, "Invalid email or password", null!);
+            }
+
+            var passwordValid = await _userManager.CheckPasswordAsync(user, request.Password);
+            if (!passwordValid)
+            {
+                return new ApiResponse<LoginResponse>(400, "Invalid email or password", null!);
+            }
+
+            if (await _userManager.IsLockedOutAsync(user))
+            {
+                return new ApiResponse<LoginResponse>(400, "User is locked", null!);
+            }
+
+            var token = await _jwtServie.GenerateTokenAsync(user);
+
+            var response = new LoginResponse
             {
                 Id = user.Id,
                 Name = user.Name,
-                UserName = user.UserName,
-                Email = user.Email,
-                Bio = user.Bio,
-                AvatarUrl = user.AvatarUrl
-            }).ToList();
-
-            return new ApiResponse<List<GetAllUsersResponse>>(200, string.Empty, response); ;
-        }
-
-        public async Task<ApiResponse<ReturnOneUserResponse>> UpdateUserAsync(Guid id, UpdateUserRequest request)
-        {
-            var user = await _userRepository.GetUserById(id);
-
-            if (user == null)
-                return new ApiResponse<ReturnOneUserResponse>(404, "Users not found", null!);
-
-            user.UpdateProfile(request.Name, request.UserName, request.Bio);
-
-            await _userRepository.UnitOfWork.CommitAsync();
-
-            var response = new ReturnOneUserResponse
-            {
-                AvatarUrl = user.AvatarUrl,
-                Bio = user.Bio,
-                Email = user.Email,
-                Name = user.Name,
-                UserName = user.UserName
+                Email = user.Email!,
+                Token = token
             };
 
-            return new ApiResponse<ReturnOneUserResponse>(200, string.Empty, response); ;
-        }
-
-        public async Task<ApiResponse<ReturnOneUserResponse>> GetUserByIdAsync(Guid id)
-        {
-            var user = await _userRepository.GetUserById(id);
-
-            if (user == null)
-                return new ApiResponse<ReturnOneUserResponse>(404, "Users not found", null!);
-
-            var response = new ReturnOneUserResponse
-            {
-                AvatarUrl = user.AvatarUrl,
-                Bio = user.Bio,
-                Email = user.Email,
-                Name = user.Name,
-                UserName = user.UserName
-            };
-
-            return new ApiResponse<ReturnOneUserResponse>(200, string.Empty, response); ;
+            return new ApiResponse<LoginResponse>(200, string.Empty, response);
         }
     }
 }

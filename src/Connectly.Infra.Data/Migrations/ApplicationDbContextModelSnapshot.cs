@@ -22,7 +22,7 @@ namespace Connectly.Infra.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Connectly.Domain.Entities.Comment", b =>
+            modelBuilder.Entity("Connectly.Domain.Contexts.Entities.Comment", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
@@ -53,7 +53,7 @@ namespace Connectly.Infra.Data.Migrations
                     b.ToTable("Comments", (string)null);
                 });
 
-            modelBuilder.Entity("Connectly.Domain.Entities.Follow", b =>
+            modelBuilder.Entity("Connectly.Domain.Contexts.Entities.Follow", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
@@ -79,7 +79,7 @@ namespace Connectly.Infra.Data.Migrations
                     b.ToTable("Follows", (string)null);
                 });
 
-            modelBuilder.Entity("Connectly.Domain.Entities.Like", b =>
+            modelBuilder.Entity("Connectly.Domain.Contexts.Entities.Like", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
@@ -103,7 +103,7 @@ namespace Connectly.Infra.Data.Migrations
                     b.ToTable("Likes", (string)null);
                 });
 
-            modelBuilder.Entity("Connectly.Domain.Entities.Post", b =>
+            modelBuilder.Entity("Connectly.Domain.Contexts.Entities.Post", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
@@ -129,49 +129,225 @@ namespace Connectly.Infra.Data.Migrations
                     b.ToTable("Posts", (string)null);
                 });
 
-            modelBuilder.Entity("Connectly.Domain.Entities.User", b =>
+            modelBuilder.Entity("Connectly.Domain.Contexts.Entities.Users.User", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
                     b.Property<string>("AvatarUrl")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
 
                     b.Property<string>("Bio")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("Connectly.Domain.Entities.Comment", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
                 {
-                    b.HasOne("Connectly.Domain.Entities.Post", "Post")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("Connectly.Domain.Contexts.Entities.Comment", b =>
+                {
+                    b.HasOne("Connectly.Domain.Contexts.Entities.Post", "Post")
                         .WithMany("Comments")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Connectly.Domain.Entities.User", "User")
+                    b.HasOne("Connectly.Domain.Contexts.Entities.Users.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -182,18 +358,18 @@ namespace Connectly.Infra.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Connectly.Domain.Entities.Follow", b =>
+            modelBuilder.Entity("Connectly.Domain.Contexts.Entities.Follow", b =>
                 {
-                    b.HasOne("Connectly.Domain.Entities.User", "Follower")
+                    b.HasOne("Connectly.Domain.Contexts.Entities.Users.User", "Follower")
                         .WithMany("Following")
                         .HasForeignKey("FollowerId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Connectly.Domain.Entities.User", "Following")
+                    b.HasOne("Connectly.Domain.Contexts.Entities.Users.User", "Following")
                         .WithMany("Followers")
                         .HasForeignKey("FollowingId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Follower");
@@ -201,9 +377,9 @@ namespace Connectly.Infra.Data.Migrations
                     b.Navigation("Following");
                 });
 
-            modelBuilder.Entity("Connectly.Domain.Entities.Like", b =>
+            modelBuilder.Entity("Connectly.Domain.Contexts.Entities.Like", b =>
                 {
-                    b.HasOne("Connectly.Domain.Entities.Post", "Post")
+                    b.HasOne("Connectly.Domain.Contexts.Entities.Post", "Post")
                         .WithMany("Likes")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -212,102 +388,74 @@ namespace Connectly.Infra.Data.Migrations
                     b.Navigation("Post");
                 });
 
-            modelBuilder.Entity("Connectly.Domain.Entities.Post", b =>
+            modelBuilder.Entity("Connectly.Domain.Contexts.Entities.Post", b =>
                 {
-                    b.HasOne("Connectly.Domain.Entities.User", null)
+                    b.HasOne("Connectly.Domain.Contexts.Entities.Users.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Connectly.Domain.Entities.User", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
-                    b.OwnsOne("Connectly.Domain.ValueObjects.Email", "Email", b1 =>
-                        {
-                            b1.Property<Guid>("UserId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<string>("Address")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)")
-                                .HasColumnName("Email");
-
-                            b1.HasKey("UserId");
-
-                            b1.ToTable("Users");
-
-                            b1.WithOwner()
-                                .HasForeignKey("UserId");
-
-                            b1.OwnsOne("Connectly.Domain.ValueObjects.Verification", "Verification", b2 =>
-                                {
-                                    b2.Property<Guid>("EmailUserId")
-                                        .HasColumnType("uniqueidentifier");
-
-                                    b2.Property<string>("Code")
-                                        .IsRequired()
-                                        .HasColumnType("nvarchar(max)")
-                                        .HasColumnName("EmailVerificationCode");
-
-                                    b2.Property<DateTime?>("ExpiresAt")
-                                        .HasColumnType("datetime2")
-                                        .HasColumnName("EmailVerificationExpiresAt");
-
-                                    b2.Property<DateTime?>("VerifiedAt")
-                                        .HasColumnType("datetime2")
-                                        .HasColumnName("EmailVerificationVerifiedAt");
-
-                                    b2.HasKey("EmailUserId");
-
-                                    b2.ToTable("Users");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("EmailUserId");
-                                });
-
-                            b1.Navigation("Verification")
-                                .IsRequired();
-                        });
-
-                    b.OwnsOne("Connectly.Domain.ValueObjects.Password", "Password", b1 =>
-                        {
-                            b1.Property<Guid>("UserId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<string>("Hash")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)")
-                                .HasColumnName("PasswordHash");
-
-                            b1.Property<string>("ResetCode")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)")
-                                .HasColumnName("PasswordResetCode");
-
-                            b1.HasKey("UserId");
-
-                            b1.ToTable("Users");
-
-                            b1.WithOwner()
-                                .HasForeignKey("UserId");
-                        });
-
-                    b.Navigation("Email")
-                        .IsRequired();
-
-                    b.Navigation("Password")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Connectly.Domain.Entities.Post", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
+                {
+                    b.HasOne("Connectly.Domain.Contexts.Entities.Users.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
+                {
+                    b.HasOne("Connectly.Domain.Contexts.Entities.Users.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Connectly.Domain.Contexts.Entities.Users.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
+                {
+                    b.HasOne("Connectly.Domain.Contexts.Entities.Users.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Connectly.Domain.Contexts.Entities.Post", b =>
                 {
                     b.Navigation("Comments");
 
                     b.Navigation("Likes");
                 });
 
-            modelBuilder.Entity("Connectly.Domain.Entities.User", b =>
+            modelBuilder.Entity("Connectly.Domain.Contexts.Entities.Users.User", b =>
                 {
                     b.Navigation("Followers");
 
