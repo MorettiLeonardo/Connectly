@@ -1,9 +1,13 @@
 ﻿using Connectly.Application.Handlers.JwtService;
 using Connectly.Application.Handlers.JwtService.Interfaces;
+using Connectly.Application.Handlers.Posts;
+using Connectly.Application.Handlers.Posts.Interfaces;
 using Connectly.Application.Handlers.Users;
 using Connectly.Application.Handlers.Users.Interfaces;
-using Connectly.Domain.Contexts.Entities.Users.Interfaces;
+using Connectly.Domain.Contexts.Entities.Interfaces;
 using Connectly.Infra.Data.Context;
+using Connectly.Infra.Data.Repositories.Likes;
+using Connectly.Infra.Data.Repositories.Posts;
 using Connectly.Infra.Data.Repositories.Users;
 using Connectly.IoC.Extensions;
 using Microsoft.EntityFrameworkCore;
@@ -27,10 +31,13 @@ namespace Connectly.IoC
 
             //handlers
             services.AddScoped<IUserHandler, UserHandler>();
+            services.AddScoped<IPostHandler, PostHandler>();
             services.AddScoped<IJwtService, JwtService>();
 
             //repositories
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<ILikeRepository, LikeRepository>();
 
             return services;
         }

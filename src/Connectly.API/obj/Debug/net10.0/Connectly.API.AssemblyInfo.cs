@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Connectly.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+00ea27ebc74c1366d503ae7817321317b17f589e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2a68209caa30f53c356f608dd120e6534eb0d08c")]
 [assembly: System.Reflection.AssemblyProductAttribute("Connectly.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Connectly.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

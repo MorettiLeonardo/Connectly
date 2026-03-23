@@ -18,7 +18,7 @@ namespace Connectly.Infra.Data.Repositories
 
         public IUnitOfWork UnitOfWork => _context;
 
-        public void Add(T entity)
+        public async void Add(T entity)
         {
             _context.Add(entity);
         }

@@ -4,8 +4,8 @@ using Connectly.Application.Handlers.Users.Interfaces;
 using Connectly.Application.Handlers.Users.Requests;
 using Connectly.Application.Handlers.Users.Requests.Validation;
 using Connectly.Application.Handlers.Users.Responses;
+using Connectly.Domain.Contexts.Entities.Interfaces;
 using Connectly.Domain.Contexts.Entities.Users;
-using Connectly.Domain.Contexts.Entities.Users.Interfaces;
 using Microsoft.AspNetCore.Identity;
 
 namespace Connectly.Application.Handlers.Users

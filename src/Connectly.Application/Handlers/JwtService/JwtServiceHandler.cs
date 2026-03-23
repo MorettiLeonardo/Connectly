@@ -1,7 +1,7 @@
 ﻿using Connectly.Application.Configurations;
 using Connectly.Application.Handlers.JwtService.Interfaces;
+using Connectly.Domain.Contexts.Entities.Interfaces;
 using Connectly.Domain.Contexts.Entities.Users;
-using Connectly.Domain.Contexts.Entities.Users.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
